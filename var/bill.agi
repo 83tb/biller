@@ -1,0 +1,35 @@
+#!/usr/bin/python
+import sys
+import xmlrpclib
+server=xmlrpclib.ServerProxy('http://10.1.4.110:80/biller/engine')
+
+from datetime import datetime
+
+#1) source of the call ex. 227383060
+#2) destination, ex 600026904
+#3) duration of the call like "124" seconds
+#4) exact datetime of the beginning of the call,
+#5) exact datetime of the end of the call,
+#6) operator - trunk in which connection was originated
+#7) uniqueid of the connection
+#8) type
+#9) host
+
+#DeadAGI(bill2.agi|${CDR(clid)}|${CDR(dst)}|${CDR(src)}|${CDR(start)}|${CDR(end)}|${CDR(answer)}|${CDR(billsec)}|${CDR(disposition)}|${CDR(uniqueid)})
+
+
+
+source = sys.argv[1]
+destination = sys.argv[2]
+duration = sys.argv[7]
+start_time =  sys.argv[4]
+end_time =  sys.argv[5]
+operator = "comptelnet"
+uniqueid = sys.argv[9]
+type = "OUTGOING"
+host= "hexagw"
+
+
+#print server
+
+xmlreq = server.bill(source,destination,duration,start_time,end_time,operator,uniqueid,type,host)
