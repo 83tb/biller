@@ -3,6 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect,HttpResponseBadRequest
 
 from django.views.decorators.csrf import csrf_exempt
 
+from biller.engine.models import *
+
 
 def connections(request):
 
@@ -120,4 +122,5 @@ def bill(source,destination,duration, start, end, operator, uniqueid, type, host
 
 
 dispatcher.register_function(bill, 'bill')
+
 
