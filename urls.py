@@ -15,9 +15,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    
+
     #url(r'^$', engine.views.connections')
-    #url(r'^$', directy
-    # _to_template, { 'template': 'index.html' }, 'index')
+    url(r'^$', direct_to_template, { 'template': 'index.html' }, 'index')
 
 )

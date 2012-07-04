@@ -5,7 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 from biller.engine.models import *
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def connections(request):
 
         t = loader.get_template("connections.html")
