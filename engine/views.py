@@ -11,7 +11,7 @@ def connections(request):
         t = loader.get_template("connections.html")
         c = RequestContext(request,{
             
-            'Connections': Connection.objects.all(),
+            'connections': Connection.objects.filter(owner="001").order_by('-end'),
             })
         return HttpResponse(t.render(c))
     
