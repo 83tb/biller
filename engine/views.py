@@ -13,7 +13,7 @@ def connections(request):
         t = loader.get_template("connections.html")
 
         owner_id = Company.objects.filter(userid=request.user)[2].client_id
-        #print owner.id
+        print owner_id
 
 
         c = RequestContext(request,{
