@@ -11,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 def connections(request):
 
         t = loader.get_template("connections.html")
-        owner_id = Company.objects.filter(userid=request.user.id)[0].client_id
+        user=User.objects.filter(id=request.user.id)
+        owner_id = Company.objects.filter(userid=user)[0].client_id
 
         c = RequestContext(request,{
             'connections': Connection.objects.filter(owner=owner_id).order_by('-end'),
