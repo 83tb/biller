@@ -1,6 +1,6 @@
 from django.template import loader, Context,RequestContext
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseBadRequest
-
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 
 from biller.engine.models import *
@@ -11,9 +11,10 @@ from django.contrib.auth.decorators import login_required
 def connections(request):
 
         t = loader.get_template("connections.html")
+        owner_id = Company.objects.filter(userid=request.user.id)[0].client_id
+
         c = RequestContext(request,{
-            
-            'connections': Connection.objects.filter(owner="001").order_by('-end'),
+            'connections': Connection.objects.filter(owner=owner_id).order_by('-end'),
             })
         return HttpResponse(t.render(c))
     

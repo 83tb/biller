@@ -24,6 +24,8 @@ from biller.engine.models import *
 import sys
 # open file to read
 f = file('companies.txt', 'r')
+from django.contrib.auth.models import User
+
 
 for line in f:
     number = line[0:9]
@@ -34,7 +36,8 @@ for line in f:
 
     # if there is no company in the db
     if len(company) == 0:
-        company = Company.objects.create(name=name,client_id=client_id)
+        userid = User.objects.all()[0]        
+        company = Company.objects.create(name=name,client_id=client_id,userid=userid)
         company.save()
 
     # if there's no such number in the db

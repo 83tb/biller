@@ -1,6 +1,6 @@
 from django.db import models
 
-
+from django.contrib.auth.models import User
 
 CONNECTION_TYPE = (
     ('1','OUTGOING'),
@@ -10,7 +10,7 @@ CONNECTION_TYPE = (
 class Company(models.Model):
     name = models.CharField(max_length=50)
     client_id = models.CharField(max_length=50)
-
+    userid = models.ForeignKey(User)
 
 
     def __unicode__(self):
@@ -54,6 +54,7 @@ class Connection(models.Model):
     type = models.CharField(max_length=50)
     host = models.CharField(max_length=50)
     owner = models.CharField(max_length=50)
+
 
 
     def __unicode__(self):
